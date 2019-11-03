@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :api do
     resources :v1 do
-
+    end
   end
 end
 
