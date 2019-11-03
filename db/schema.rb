@@ -10,9 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2019_11_03_064901) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "arcanas", force: :cascade do |t|
+    t.string "key"
+    t.integer "deck_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "cards", force: :cascade do |t|
+    t.boolean "major"
+    t.boolean "minor"
+    t.string "role"
+    t.bigint "arcana_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["arcana_id"], name: "index_cards_on_arcana_id"
+  end
+
+  create_table "decks", force: :cascade do |t|
+    t.integer "count", default: 78
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "cards", "arcanas"
 end
