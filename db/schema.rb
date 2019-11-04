@@ -10,23 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_03_064901) do
+ActiveRecord::Schema.define(version: 2019_11_04_031840) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "arcanas", force: :cascade do |t|
     t.string "key"
-    t.integer "deck_id"
+    t.integer "count"
+    t.bigint "deck_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["deck_id"], name: "index_arcanas_on_deck_id"
   end
 
   create_table "cards", force: :cascade do |t|
-    t.boolean "major"
-    t.boolean "minor"
     t.string "role"
+    t.boolean "trump"
     t.bigint "arcana_id"
+    t.string "suit"
+    t.integer "rank"
+    t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["arcana_id"], name: "index_cards_on_arcana_id"
@@ -34,9 +38,11 @@ ActiveRecord::Schema.define(version: 2019_11_03_064901) do
 
   create_table "decks", force: :cascade do |t|
     t.integer "count", default: 78
+    t.boolean "shuffled", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "arcanas", "decks"
   add_foreign_key "cards", "arcanas"
 end

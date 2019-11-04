@@ -34,6 +34,8 @@ gem 'json'
 # gem "jwt", "~> 2.1"
 # gem 'jwt', '~> 1.5'
 
+gem 'database_cleaner', '~> 1.7'
+
 #create seed data
 gem 'faker', '~> 1.9', '>= 1.9.1'
 gem 'ffaker', '~> 2.10'
@@ -53,7 +55,7 @@ end
 
 group :test do
   gem 'cucumber-rails', require: false
-  gem 'database_cleaner'
+  # gem 'database_cleaner'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

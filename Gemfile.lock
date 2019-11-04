@@ -220,7 +220,7 @@ DEPENDENCIES
   bootsnap (>= 1.1.0)
   byebug
   cucumber-rails
-  database_cleaner
+  database_cleaner (~> 1.7)
   dotenv
   faker (~> 1.9, >= 1.9.1)
   ffaker (~> 2.10)

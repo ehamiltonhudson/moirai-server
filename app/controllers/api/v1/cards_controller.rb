@@ -1,4 +1,4 @@
-class CardsController < ApplicationController
+class Api::V1::CardsController < ApplicationController
   before_action :set_card, only: [:show, :update, :destroy]
 
   # GET /cards
@@ -46,6 +46,6 @@ class CardsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def card_params
-      params.require(:card).permit(:role, :major, :minor, :arcana_id)
+      params.require(:card).permit(:role, :trump, :arcana_id, :suit, :rank, :image)
     end
 end

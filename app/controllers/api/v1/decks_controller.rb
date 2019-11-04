@@ -26,10 +26,13 @@ class Api::V1::DecksController < ApplicationController
 
   # PATCH/PUT /decks/1
   def update
-    if @deck.update(deck_params)
+    # if @deck.update(deck_params)
+    @deck.update(deck_params)
+    if @deck.valid?
+      @deck.save
       render json: @deck
     else
-      render json: @deck.errors, status: :unprocessable_entity
+      render json: @deck.errors, @arcana.errors status: :unprocessable_entity
     end
   end
 
@@ -46,6 +49,6 @@ class Api::V1::DecksController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def deck_params
-      params.require(:deck).permit(:count)
+      params.require(:deck).permit(:count, :shuffled)
     end
 end

@@ -46,6 +46,6 @@ class Api::V1::ArcanasController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def arcana_params
-      params.require(:arcana).permit(:key, :deck_id)
+      params.require(:arcana).permit(:key, :count, :deck_id)
     end
 end
