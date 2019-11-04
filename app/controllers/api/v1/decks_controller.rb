@@ -1,16 +1,16 @@
 class Api::V1::DecksController < ApplicationController
-  before_action :set_deck, only: [:show, :update, :destroy]
+  before_action :find_deck, only: [:show, :update, :destroy]
 
   # GET /decks
   def index
     @decks = Deck.all
 
-    render json: @decks
+    render json: @decks, status: 200
   end
 
   # GET /decks/1
   def show
-    render json: @deck
+    render json: @deck, status: 200
   end
 
   # POST /decks
@@ -18,7 +18,7 @@ class Api::V1::DecksController < ApplicationController
     @deck = Deck.new(deck_params)
 
     if @deck.save
-      render json: @deck, status: :created, location: @deck
+      render json: @deck, status: :created, location: @deck, status: 200
     else
       render json: @deck.errors, status: :unprocessable_entity
     end
@@ -30,9 +30,9 @@ class Api::V1::DecksController < ApplicationController
     @deck.update(deck_params)
     if @deck.valid?
       @deck.save
-      render json: @deck
+      render json: @deck, status: 200
     else
-      render json: @deck.errors, @arcana.errors status: :unprocessable_entity
+      render json: @deck.errors, status: :unprocessable_entity
     end
   end
 
@@ -43,7 +43,7 @@ class Api::V1::DecksController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_deck
+    def find_deck
       @deck = Deck.find(params[:id])
     end
 

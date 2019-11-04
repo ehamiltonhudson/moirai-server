@@ -1,16 +1,16 @@
 class Api::V1::ArcanasController < ApplicationController
-  before_action :set_arcana, only: [:show, :update, :destroy]
+  before_action :find_arcana, only: [:show, :update, :destroy]
 
   # GET /arcanas
   def index
     @arcanas = Arcana.all
 
-    render json: @arcanas
+    render json: @arcanas, status: 200
   end
 
   # GET /arcanas/1
   def show
-    render json: @arcana
+    render json: @arcana, status: 200
   end
 
   # POST /arcanas
@@ -18,7 +18,7 @@ class Api::V1::ArcanasController < ApplicationController
     @arcana = Arcana.new(arcana_params)
 
     if @arcana.save
-      render json: @arcana, status: :created, location: @arcana
+      render json: @arcana, status: :created, location: @arcana, status: 200
     else
       render json: @arcana.errors, status: :unprocessable_entity
     end
@@ -27,7 +27,7 @@ class Api::V1::ArcanasController < ApplicationController
   # PATCH/PUT /arcanas/1
   def update
     if @arcana.update(arcana_params)
-      render json: @arcana
+      render json: @arcana, status: 200
     else
       render json: @arcana.errors, status: :unprocessable_entity
     end
@@ -40,7 +40,7 @@ class Api::V1::ArcanasController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_arcana
+    def find_arcana
       @arcana = Arcana.find(params[:id])
     end
 

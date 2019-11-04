@@ -1,16 +1,16 @@
 class Api::V1::CardsController < ApplicationController
-  before_action :set_card, only: [:show, :update, :destroy]
+  before_action :find_card, only: [:show, :update, :destroy]
 
   # GET /cards
   def index
     @cards = Card.all
 
-    render json: @cards
+    render json: @cards, status: 200
   end
 
   # GET /cards/1
   def show
-    render json: @card
+    render json: @card, status: 200
   end
 
   # POST /cards
@@ -18,7 +18,7 @@ class Api::V1::CardsController < ApplicationController
     @card = Card.new(card_params)
 
     if @card.save
-      render json: @card, status: :created, location: @card
+      render json: @card, status: :created, location: @card, status: 200
     else
       render json: @card.errors, status: :unprocessable_entity
     end
@@ -27,7 +27,7 @@ class Api::V1::CardsController < ApplicationController
   # PATCH/PUT /cards/1
   def update
     if @card.update(card_params)
-      render json: @card
+      render json: @card, status: 200
     else
       render json: @card.errors, status: :unprocessable_entity
     end
@@ -40,7 +40,7 @@ class Api::V1::CardsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_card
+    def find_card
       @card = Card.find(params[:id])
     end
 
